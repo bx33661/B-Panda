@@ -1,13 +1,19 @@
-#
+# 
 
 这是一个Python自动化项目。
 主要包含以下模块：
+
 1. finder
+
 > 主要是对本地文件进行快速查找
-2. email-auto
+
+2. emailer
+
 > 邮件自动化
-3. word-gpt
-> 利用ai赋能word
+
+3. pdfer
+
+> 对pdf进行自动化处理
 
 ## 功能
 
@@ -18,17 +24,17 @@
 ## 安装
 
 1. 克隆仓库：
-    ```bash
-    git clone https://github.com/yourusername/python-automation.git
-    ```
+   ```bash
+   git clone https://github.com/yourusername/python-automation.git
+   ```
 2. 进入项目目录：
-    ```bash
-    cd python-automation/finder
-    ```
+   ```bash
+   cd python-automation/finder
+   ```
 3. 安装依赖：
-    ```bash
-    pip install -r requirements.txt
-    ```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## 使用方法
 
