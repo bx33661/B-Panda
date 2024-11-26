@@ -256,7 +256,7 @@ python pdfer1.py -a extract_pages -i ./input.pdf -o ./output/extracted_pages.pdf
 
 如果你有任何问题或建议，请联系开发者：
 
-- **邮箱**: support@bx33661.com
+- **邮箱**: bx33661@gmail.com
 - **网站**: https://www.bx33661.com/
 
 希望这份说明文档能帮助你更好地使用PDF自动化工具！如果有任何问题，请随时联系支持团队。
