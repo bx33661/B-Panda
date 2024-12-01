@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B-Panda|网站监控系统</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Navigation bar styles */
+        nav {
+            background-color: #007BFF;
+            padding: 10px 20px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffc107;
+            transform: scale(1.1);
+        }
+
+        /* Header */
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 2.5em;
+            color: #444;
+        }
+
+        /* Container for the website URL input */
+        #add-website-form {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #add-website-form input {
+            padding: 12px;
+            font-size: 1.1em;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+            margin-right: 10px;
+            transition: border-color 0.3s;
+        }
+
+        #add-website-form input:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        #add-website-form button {
+            padding: 12px 25px;
+            font-size: 1.1em;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #add-website-form button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Styling for the charts container */
+        #charts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        /* Each chart container */
+        .chart-container {
+            width: 45%;
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: #333;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 350px !important;
+            background-color: #fafafa;
+            border-radius: 8px;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .chart-container {
+                width: 100%;
+            }
+
+            #add-website-form input {
+                width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav>
+        <a href="#">主页</a>
+        <a href="#">监控</a>
+        <a href="#">设置</a>
+    </nav>
+
+    <!-- Header -->
+    <h1>B-Panda|网站监控系统</h1>
+
+    <!-- Add website form -->
+    <form id="add-website-form">
+        <input type="text" id="url" name="url" placeholder="eg:http://www.bx33661.com/" required>
+        <button type="submit">添加网站</button>
+    </form>
+
+    <!-- Charts container -->
+    <div id="charts"></div>
+
+    <!-- Footer with description -->
+    <footer>
+        <p>&copy; 2024 B-Panda|网站监控系统. All rights reserved.</p>
+        <p>B-Panda 是一个强大且简易使用的在线工具，旨在帮助用户实时监控其网站的状态和性能。通过这个平台，您可以轻松地查看网站的响应时间、状态码以及其他关键的性能指标，从而确保网站运行稳定，提供最佳的用户体验。</p>
+        <p>想了解更多？ <a href="#">联系我们</a></p>
+    </footer>
+
+    <script>
+        document.getElementById('add-website-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const url = document.getElementById('url').value;
+            fetch('/api/add_website', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: url })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+        function fetchMonitorData() {
+            fetch('/api/monitor')
+            .then(response => response.json())
+            .then(data => {
+                const chartsDiv = document.getElementById('charts');
+                chartsDiv.innerHTML = '';
+
+                const websites = {};
+                data.forEach(entry => {
+                    if (!websites[entry.url]) {
+                        websites[entry.url] = {
+                            labels: [],
+                            statusCodes: [],
+                            responseTimes: []
+                        };
+                    }
+                    websites[entry.url].labels.push(entry.timestamp);
+                    websites[entry.url].statusCodes.push(entry.status_code);
+                    websites[entry.url].responseTimes.push(entry.response_time);
+                });
+
+                for (const url in websites) {
+                    const websiteData = websites[url];
+                    const chartDiv = document.createElement('div');
+                    chartDiv.classList.add('chart-container');
+                    chartDiv.innerHTML = `
+                        <h2>${url}</h2>
+                        <canvas id="chart-${url}"></canvas>
+                    `;
+                    chartsDiv.appendChild(chartDiv);
+
+                    const ctx = document.getElementById(`chart-${url}`).getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: websiteData.labels,
+                            datasets: [
+                                {
+                                    label: 'Status Code',
+                                    data: websiteData.statusCodes,
+                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'Response Time (s)',
+                                    data: websiteData.responseTimes,
+                                    borderColor: 'rgba(255, 99, 132, 1)',
+                                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                    fill: false,
+                                    yAxisID: 'y1'
+                                }
+                            ]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Status Code'
+                                    }
+                                },
+                                y1: {
+                                    type: 'linear',
+                                    position: 'right',
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Response Time (s)'
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        setInterval(fetchMonitorData, 5000);
+        fetchMonitorData();
+    </script>
+</body>
+</html>

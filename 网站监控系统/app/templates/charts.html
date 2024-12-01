@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring Charts</title>
+</head>
+<body>
+    <h1>Website Monitoring Charts</h1>
+
+    <!-- 显示响应时间的图表 -->
+    <h2>Response Time over Time</h2>
+    <img src="data:image/png;base64,{{ img1_b64 }}" alt="Response Time Chart"/>
+
+    <!-- 显示状态码分布的图表 -->
+    <h2>Status Code Distribution</h2>
+    {{ graph2_html | safe }}
+</body>
+</html>
