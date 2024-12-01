@@ -1,62 +1,74 @@
-<<<<<<< HEAD
-# 
+# B-Panda|自动化工具
 
-这是一个Python自动化项目。
-主要包含以下模块：
+---
 
-1. finder
+> @Author:bx33661
+>
+> @课程：高级程序设计
+>
+> @Blog：htttp://www.bx33661.com/
 
-> 主要是对本地文件进行快速查找
+项目地址：
 
-2. emailer
+- Github：
+- Gitee：
 
-> 邮件自动化
+<img src="https://gitee.com/bx33661/image/raw/master/path/image-20241201171117454.png" alt="image-20241201171117454" style="zoom: 25%;" />
 
-3. pdfer
+## 基本介绍
 
-> 对pdf进行自动化处理
+本项目基于Python开发，主要包括`B-Panda|自动化工具箱`和`B-Panda|网站监控系统`
 
-## 功能
+- B-Panda|自动化工具箱
 
-- 在指定目录中查找文件
-- 支持按文件名、文件类型和文件内容进行查找
-- 输出查找结果到指定文件
+> 目前有web端和本地脚本模块，两种使用形式
 
-## 安装
+目前只有三个功能：
 
-1. 克隆仓库：
-   ```bash
-   git clone https://github.com/yourusername/python-automation.git
-   ```
-2. 进入项目目录：
-   ```bash
-   cd python-automation/finder
-   ```
-3. 安装依赖：
-   ```bash
-   pip install -r requirements.txt
-   ```
+- PDFer
 
-## 使用方法
+这个主要是对PDF文件进行文本提取，水印添加，拆分，加密等操作
 
-```bash
-用法: python 1.py <目录路径> <关键词> [模式] [-o <输出文件路径>]
-模式: name (文件名匹配), content (文件内容匹配)。默认模式为 'name'。
-示例:
-  python finder.py C:\\Downloads\\ dx
-  python finder.py C:\\Downloads\\ dx content
-  python finder.py C:\\Downloads\\ dx content -o results.txt
-  python finder.py -h  
-```
+- Emailer
 
-## 贡献
+这个主要是对邮件进行定时发送和特定对应自动回复（目前只支持qq邮箱）
 
-欢迎贡献代码！请提交Pull Request或报告问题。
+- Finder
 
-## 许可证
+这个主要是对本地文件和特定文件内容进行查找（灵感来源于：everything）
 
-此项目使用MIT许可证。详情请参阅LICENSE文件。
-=======
-> Python高级程序设计
-![LOGO](logo.png)
->>>>>>> 949b840f06e65754ac54ffdc788df4e6053522fc
+![image-20241201171321478](https://gitee.com/bx33661/image/raw/master/path/image-20241201171321478.png)
+
+
+
+- B-Panda|网站监控系统
+
+> 由于我最近运营着几个个人网站，需要对网站运行情况进行监控，
+>
+> 灵感来源于[**Uptime Kuma**](http://43.134.9.57:3001/dashboard)
+>
+> 一个优美的监控系统
+
+主要是对网站状态进行定时监控，记录
+
+技术栈：
+
+Python、Flask，chart.js
+
+![image-20241201165753647](https://gitee.com/bx33661/image/raw/master/path/image-20241201165753647.png)
+
+
+
+## 使用说明
+
+- Finder
+
+![image-20241201172344826](https://gitee.com/bx33661/image/raw/master/path/image-20241201172344826.png)
+
+- Pdfer
+
+![image-20241201172431125](https://gitee.com/bx33661/image/raw/master/path/image-20241201172431125.png)
+
+- Emailer
+
+![image-20241201172539974](C:/Users/lenovo/AppData/Roaming/Typora/typora-user-images/image-20241201172539974.png)
