@@ -1,3 +1,5 @@
+<meta name="referrer" content="no-referrer">
+
 # B-Panda|自动化工具
 
 ---
