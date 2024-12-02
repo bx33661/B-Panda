@@ -196,42 +196,56 @@
         </p>
         <div class="row g-4">
             <!-- PDF操作卡片 -->
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body text-center">
+            <div class="col-md-4 col-12">
+                <div class="card shadow-sm d-flex flex-column" style="min-height: 250px;">
+                    <div class="card-body text-center flex-grow-1">
                         <h5 class="card-title"><i class="fas fa-file-pdf text-danger"></i>PDF操作</h5>
                         <p class="card-text">快速处理您的PDF文件，例如合并、拆分或压缩。</p>
                         <a href="{{ url_for('pdf_routes.pdf_index') }}" class="btn btn-primary">前往操作</a>
                     </div>
                 </div>
             </div>
+        
             <!-- 邮件操作卡片 -->
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body text-center">
+            <div class="col-md-4 col-12">
+                <div class="card shadow-sm d-flex flex-column" style="min-height: 250px;">
+                    <div class="card-body text-center flex-grow-1">
                         <h5 class="card-title"><i class="fas fa-envelope text-warning"></i>邮件操作</h5>
                         <p class="card-text">管理和自动化您的邮件，例如批量发送或格式化。</p>
                         <a href="{{ url_for('email_routes.email_index') }}" class="btn btn-primary">开始管理</a>
                     </div>
                 </div>
             </div>
+        
             <!-- 文件查找卡片 -->
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body text-center">
+            <div class="col-md-4 col-12">
+                <div class="card shadow-sm d-flex flex-column" style="min-height: 250px;">
+                    <div class="card-body text-center flex-grow-1">
                         <h5 class="card-title"><i class="fas fa-search text-success"></i>文件查找</h5>
                         <p class="card-text">通过关键字快速查找您的重要文件。</p>
                         <a href="{{ url_for('find_routes.find_index') }}" class="btn btn-primary">查找文件</a>
                     </div>
                 </div>
             </div>
-        </div>
+        
+            <!-- Base64编解码 -->
+            <div class="col-md-4 col-12">
+                <div class="card shadow-sm d-flex flex-column" style="min-height: 250px;">
+                    <div class="card-body text-center flex-grow-1">
+                        <h5 class="card-title"><i class="fa-solid fa-keyboard"></i>Base64编解码</h5>
+                        <p class="card-text">进行快速的Base64编解码，帮助你快人一倍。</p>
+                        <a href="{{ url_for('bs_routes.bs_index') }}"  class="btn btn-primary">Base64</a>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
 
         <!-- 新增的卡片布局 -->
         <div class="row mt-5 g-4">
             <!-- 文档说明卡片 -->
             <div class="col-md-6">
-                <div class="card shadow-sm special-card">
+                <div class="card shadow-sm special-card" style="min-width: 200px;">
                     <div class="card-body text-center">
                         <h5 class="card-title"><i class="fas fa-book text-info"></i>文档说明</h5>
                         <p class="card-text">了解B-Panda的使用文档和常见问题解答。</p>
