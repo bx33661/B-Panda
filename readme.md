@@ -61,14 +61,47 @@ Python、Flask，chart.js
 
 ## 使用说明
 
+### B-Panda|自动化工具箱
+
 - Finder
 
 ![image-20241201172344826](https://gitee.com/bx33661/image/raw/master/path/image-20241201172344826.png)
 
 - Pdfer
 
+【web界面】
+
+![image-20241202081204667](https://gitee.com/bx33661/image/raw/master/path/image-20241202081204667.png)
+
+【脚本界面】
+
 ![image-20241201172431125](https://gitee.com/bx33661/image/raw/master/path/image-20241201172431125.png)
 
 - Emailer
 
-![image-20241201172539974](C:/Users/lenovo/AppData/Roaming/Typora/typora-user-images/image-20241201172539974.png)
+【web界面】
+
+![image-20241202081320031](https://gitee.com/bx33661/image/raw/master/path/image-20241202081320031.png)
+
+【脚本界面】
+
+![image-20241201172539974](https://gitee.com/bx33661/image/raw/master/path/image-20241201172539974.png)
+
+1. 克隆仓库，安装所需要包
+
+```bash
+git clone https://github.com/bx33661/B-Panda.git
+cd BTools
+#安装包
+pip install -r requirements.txt
+```
+
+2. 运行web控制台
+
+```bash
+cd web
+cd app
+python app.py
+```
+
+![image-20241202081029481](https://gitee.com/bx33661/image/raw/master/path/image-20241202081029481.png)

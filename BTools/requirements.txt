@@ -1,0 +1,8 @@
+Flask==2.3.2
+PyPDF2==3.0.1
+reportlab==3.6.10
+smtplib
+email
+schedule==1.1.0
+imaplib
+argparse
