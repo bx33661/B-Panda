@@ -29,8 +29,9 @@
 
 > 目前有web端和本地脚本模块，两种使用形式
 
+![image-20241204135203800](https://gitee.com/bx33661/image/raw/master/path/image-20241204135203800.png)
 
-![image-20241201171321478](https://gitee.com/bx33661/image/raw/master/path/image-20241201171321478.png)
+![image-20241204135219667](https://gitee.com/bx33661/image/raw/master/path/image-20241204135219667.png)
 
 
 
