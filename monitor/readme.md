@@ -1,3 +1,5 @@
+<meta name="referrer" content="no-referrer">
+
 # B-Panda|网站监控系统
 
 ----
@@ -26,4 +28,51 @@ B-Panda 是一个强大且简易使用的在线工具，旨在帮助用户实时
 1. 输入您的网站URL，点击“添加网站”。
 2. 系统将开始实时监控您的网站，并生成详细的监控报告。
 3. 您可以通过直观的图表查看状态码和响应时间，确保您的网站始终保持高效运行。
+
+
+
+### 项目结构
+
+```bash
+app/
+├── app.py
+├── models.py
+├── config.py
+└── templates/
+    └── index.html
+```
+
+
+
+### 技术栈
+
+1. 后端框架
+
+`Flask`: 一个轻量级的 `Python Web` 框架，用于构建 Web 应用程序。Flask 提供了简单易用的接口，适合快速开发和小型到中型的应用程序。
+
+2. 数据库
+
+`SQLAlchemy`: 一个功能强大的 Python SQL 工具包和对象关系映射（ORM）库。在这个项目中，`SQLAlchemy` 用于与数据库进行交互，管理数据库模型和执行数据库操作。
+
+SQLite: 一个轻量级的嵌入式数据库，通常用于开发和测试阶段。在这个项目中，SQLite 作为默认的数据库引擎。
+
+3. 任务调度
+
+`APScheduler`: 一个 Python 库，用于在后台执行定时任务。在这个项目中，`APScheduler` 用于定期检查目标网站的状态。
+
+4. HTTP 请求
+
+`Requests`: 一个简单易用的 Python 库，用于发送 HTTP 请求。在这个项目中，Requests 用于向目标网站发送 GET 请求以检查其状态。
+
+5. 配置管理
+
+`Config` 类: 用于管理应用程序的配置。通过 config.py 文件定义配置类，并在 app.py 中加载这些配置。
+
+6. 前端模板
+
+`Jinja2`: Flask 默认使用的模板引擎，用于渲染 HTML 页面。在这个项目中，Jinja2 用于渲染主页模板 index.html。
+
+
+
+
 

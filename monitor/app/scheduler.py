@@ -11,7 +11,7 @@ scheduler = BackgroundScheduler()
 # 定时任务：检查网站状态
 def check_website(url):
     try:
-        response = requests.get(url, timeout=5)  # 设置请求超时为 5 秒
+        response = requests.get(url, timeout=3600)  # 设置请求超时为 3600 秒
         status_code = response.status_code
         response_time = response.elapsed.total_seconds()
     except requests.exceptions.RequestException as e:
