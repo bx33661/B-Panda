@@ -25,23 +25,10 @@
 
 本项目基于Python开发，主要包括`B-Panda|自动化工具箱`和`B-Panda|网站监控系统`
 
-- B-Panda|自动化工具箱
+- B-Panda|自动化工具平台
 
 > 目前有web端和本地脚本模块，两种使用形式
 
-目前只有三个功能：
-
-- PDFer
-
-这个主要是对PDF文件进行文本提取，水印添加，拆分，加密等操作
-
-- Emailer
-
-这个主要是对邮件进行定时发送和特定对应自动回复（目前只支持qq邮箱）
-
-- Finder
-
-这个主要是对本地文件和特定文件内容进行查找（灵感来源于：everything）
 
 ![image-20241201171321478](https://gitee.com/bx33661/image/raw/master/path/image-20241201171321478.png)
 
