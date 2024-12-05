@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  web:
+    image: bx33661/btools-web:latest  # 替换为你的镜像名称
+    container_name: btools-web
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=production
+    restart: unless-stopped
+    networks:
+      - btools-network
+
+networks:
+  btools-network:
+    driver: bridge
