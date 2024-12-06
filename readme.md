@@ -4,142 +4,233 @@
 
 ---
 
-> @Author:bx33661
+> @Author: bx33661
 >
-> @课程：高级程序设计
+> @课程：高级程序设计(python)
 >
 > @Blog：htttp://www.bx33661.com/
 
 项目地址：
 
+- 文档站：http://doc.bx33661.com/
+
 - Github：https://github.com/bx33661/B-Panda
 - Gitee：https://gitee.com/bx33661/B-Panda
+- Docker Hub: https://hub.docker.com/r/bx33661/btools
 
 <img src="https://gitee.com/bx33661/image/raw/master/path/image-20241201171117454.png" alt="image-20241201171117454" style="zoom: 25%;" />
 
-**具体文档：**
-
-**http://doc.bx33661.com/**
-
 ## 基本介绍
 
-本项目基于Python开发，主要包括`B-Panda|自动化工具箱`和`B-Panda|网站监控系统`
+本项目基于Python开发，主要包括`B-Panda|自动化工具箱`和`B-Panda|网站监控系统`。提供多种部署方式，支持传统安装和Docker容器化部署。
 
-- B-Panda|自动化工具平台
+![image-20241206143321845](https://gitee.com/bx33661/image/raw/master/path/image-20241206143321845.png)
 
-> 目前有web端和本地脚本模块，两种使用形式
+### 功能特点
 
-![image-20241204135203800](https://gitee.com/bx33661/image/raw/master/path/image-20241204135203800.png)
+- PDF文件处理：合并、拆分、压缩等操作
+- 邮件自动化：批量发送、模板管理
+- 文件查找：快速定位文件
+- Base64编解码：在线转换工具
+- 系统监控：实时监控系统状态
+- 网络工具：IP查询、端口扫描、Ping测试等
+- 网站监控：多站点状态监控
 
-![image-20241204135219667](https://gitee.com/bx33661/image/raw/master/path/image-20241204135219667.png)
+### 技术栈
 
+- 后端：Python、Flask
+- 前端：Bootstrap、Chart.js
+- 容器化：Docker
+- 监控：自研监控系统
 
+## 部署指南
 
-- B-Panda|网站监控系统
+### 方式一：Docker 部署（推荐）
 
-> 由于我最近运营着几个个人网站，需要对网站运行情况进行监控，
->
-> 灵感来源于[**Uptime Kuma**](http://43.134.9.57:3001/dashboard)
->
-> 一个优美的监控系统
-
-主要是对网站状态进行定时监控，记录
-
-技术栈：
-
-Python、Flask，chart.js
-
-![image-20241201165753647](https://gitee.com/bx33661/image/raw/master/path/image-20241201165753647.png)
-
-
-
-## 使用说明
-
-### B-Panda|自动化工具箱
-
-- Finder
-
-【web界面】
-
-![image-20241202103915489](https://gitee.com/bx33661/image/raw/master/path/image-20241202103915489.png)
-
-【脚本界面】
-
-![image-20241201172344826](https://gitee.com/bx33661/image/raw/master/path/image-20241201172344826.png)
-
-- Pdfer
-
-【web界面】
-
-![image-20241202081204667](https://gitee.com/bx33661/image/raw/master/path/image-20241202081204667.png)
-
-【脚本界面】
-
-![image-20241201172431125](https://gitee.com/bx33661/image/raw/master/path/image-20241201172431125.png)
-
-- Emailer
-
-【web界面】
-
-![image-20241202081320031](https://gitee.com/bx33661/image/raw/master/path/image-20241202081320031.png)
-
-【脚本界面】
-
-![image-20241201172539974](https://gitee.com/bx33661/image/raw/master/path/image-20241201172539974.png)
-
-1. 克隆仓库，安装所需要包
+最简单的部署方式是使用 Docker：
 
 ```bash
+# 拉取镜像
+docker pull bx33661/btools:latest
+
+# 运行容器
+docker run -d -p 5000:5000 --name btools-web bx33661/btools:latest
+```
+
+使用 docker-compose 部署：
+
+```bash
+# 1. 创建 docker-compose.yml
+version: '3.8'
+
+services:
+  web:
+    image: bx33661/btools:latest
+    container_name: btools-web
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+    volumes:
+      - ./logs:/app/logs
+
+# 2. 启动服务
+docker-compose up -d
+```
+
+### 方式二：传统部署
+
+1. 克隆仓库并安装依赖：
+
+```bash
+# 克隆项目
 git clone https://github.com/bx33661/B-Panda.git
 cd BTools
-#安装包
+
+# 安装依赖
 pip install -r requirements.txt
 ```
 
-2. 运行web控制台
+2. 运行应用：
 
 ```bash
-cd web
-cd app
+cd web/app
 python app.py
 ```
 
-![image-20241202081029481](https://gitee.com/bx33661/image/raw/master/path/image-20241202081029481.png)
+### 方式三：自行构建 Docker 镜像
 
-
-
-### **B-Panda - 实时网站监控工具**
-
-B-Panda 是一个强大且简易使用的在线工具，旨在帮助用户实时监控其网站的状态和性能。通过这个平台，您可以轻松地查看网站的响应时间、状态码以及其他关键的性能指标，从而确保网站运行稳定，提供最佳的用户体验。
-
-![image-20241201165753647](https://gitee.com/bx33661/image/raw/master/path/image-20241201165753647.png)
-
-#### **主要功能**：
-
-- **实时监控**：定时检查您网站的状态，包括返回的状态码（如200成功、404未找到、500服务器错误等）和响应时间。
-- **多站点支持**：您可以同时监控多个网站，并查看每个网站的详细历史数据。
-- **直观的图表展示**：所有监控数据都通过易于理解的图表呈现，您可以快速判断网站的健康状况。
-- **快速反馈**：一旦添加新的监控网站，系统会在每次监控后及时反馈结果，帮助您快速发现潜在的问题。
-
-#### **适用场景**：
-
-- **开发者与运维人员**：确保开发和运营中的网站处于正常运行状态。
-- **网站管理员**：快速检测网站性能瓶颈，进行性能优化。时刻了解网站的健康状况，减少潜在的业务中断风险。
-
-#### **如何使用**：
-
-```python
+```bash
+# 克隆项目
 git clone https://github.com/bx33661/B-Panda.git
-cd app
+cd web/app
+
+# 构建镜像
+docker build -t btools:latest .
+
+# 运行容器
+docker run -d -p 5000:5000 --name btools-web btools:latest
 ```
 
-运行文件
+## 使用说明
 
-```python 
-python app.py
+访问 http://localhost:5000 即可使用所有功能。
+
+### B-Panda|自动化工具箱
+
+网站截图（部分）：
+
+![](https://gitee.com/bx33661/image/raw/master/path/image-20241206143321845.png)
+
+![image-20241206143407405](https://gitee.com/bx33661/image/raw/master/path/image-20241206143407405.png)
+
+具体工具界面：
+
+- 系统资源监控：
+
+![image-20241206143856572](https://gitee.com/bx33661/image/raw/master/path/image-20241206143856572.png)
+
+- 网络工具页面
+
+![网络工具页面](https://gitee.com/bx33661/image/raw/master/path/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7%E9%A1%B5%E9%9D%A2.png)
+
+- Base64编解码
+
+![Bs64页面](https://gitee.com/bx33661/image/raw/master/path/Bs64%E9%A1%B5%E9%9D%A2.png)
+
+- Pdfer
+
+![pdf](https://gitee.com/bx33661/image/raw/master/path/pdf.png)
+
+网站监控系统
+
+...
+
+## 注意事项
+
+1. Docker 部署时请确保端口 5000 未被占用
+2. 生产环境建议使用 nginx 等反向代理
+3. 需要持久化数据时，请正确配置 volumes
+4. 建议定期备份重要数据
+
+## 项目结构
+
+```
+BTools/
+├── README.md                 # 项目说明文档
+├── requirements.txt          # 全局依赖
+└── web/                     # Web应用目录
+    └── app/                 # Flask应用
+        ├── app.py           # 应用入口
+        ├── Dockerfile       # Docker配置文件
+        ├── docker-compose.yml  # Docker Compose配置
+        ├── requirements.txt    # 应用依赖
+        ├── static/          # 静态文件目录
+        │   ├── css/         # CSS样式文件
+        │   ├── js/          # JavaScript文件
+        │   └── images/      # 图片资源
+        ├── templates/       # 模板文件目录
+        │   ├── base.html    # 基础模板
+        │   ├── index.html   # 首页模板
+        │   ├── pdf.html     # PDF工具页面
+        │   ├── email.html   # 邮件工具页面
+        │   ├── find.html    # 文件查找页面
+        │   ├── bs.html      # Base64工具页面
+        │   ├── network.html # 网络工具页面
+        │   └── monitor.html # 系统监控页面
+        ├── routes/          # 路由模块
+        │   ├── __init__.py
+        │   ├── pdf_routes.py    # PDF相关路由
+        │   ├── email_routes.py  # 邮件相关路由
+        │   ├── find_routes.py   # 文件查找路由
+        │   ├── bs_routes.py     # Base64相关路由
+        │   ├── network_routes.py # 网络工具路由
+        │   └── system_monitor_routes.py # 系统监控路由
+        └── utils/           # 工具模块
+            ├── __init__.py
+            ├── pdf_utils.py     # PDF处理工具
+            ├── email_utils.py   # 邮件处理工具
+            ├── find_utils.py    # 文件查找工具
+            ├── bs_utils.py      # Base64处理工具
+            └── monitor_utils.py # 监控工具
 ```
 
-![image-20241202102055652](https://gitee.com/bx33661/image/raw/master/path/image-20241202102055652.png)
+### 主要目录说明：
 
+- `/web/app/`: Flask应用主目录
+  - `app.py`: 应用入口文件
+  - `routes/`: 路由模块，处理不同功能的路由
+  - `utils/`: 工具模块，包含各种功能的具体实现
+  - `templates/`: HTML模板文件
+  - `static/`: 静态资源文件
 
+### 关键文件说明：
 
+- `Dockerfile`: Docker镜像构建配置
+- `docker-compose.yml`: Docker容器编排配置
+- `requirements.txt`: Python依赖包列表
+- `base.html`: 基础模板，定义了页面的基本结构
+- `app.py`: 应用主文件，包含Flask应用初始化和配置
+
+## 更新日志
+
+### v1.0.0 (2024-03-xx)
+
+- 初始版本发布
+- 支持 Docker 部署
+- 完整的工具箱功能
+- 网站监控系统
+
+## 贡献指南
+
+欢迎提交 Issue 和 Pull Request！
+
+## 许可证
+
+MIT License
+
+## 联系作者
+
+- 博客：http://www.bx33661.com/
+- Github：https://github.com/bx33661
