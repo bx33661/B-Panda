@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    image: bx33661/btools:latest
+    container_name: btools-web
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+    volumes:
+      - ./logs:/app/logs
+
+networks:
+  btools-network:
+    driver: bridge

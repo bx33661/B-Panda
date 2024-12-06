@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">网络工具</h2>
+    
+    <!-- Ping测试 -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-network-wired me-2"></i>Ping测试</h5>
+        </div>
+        <div class="card-body">
+            <form id="pingForm" class="mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="host" placeholder="输入主机名或IP地址" required>
+                    <button class="btn btn-primary" type="submit">开始Ping</button>
+                </div>
+            </form>
+            <pre id="pingResult" class="bg-light p-3 rounded" style="display: none;"></pre>
+        </div>
+    </div>
+
+    <!-- 端口扫描 -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-search-location me-2"></i>端口扫描</h5>
+        </div>
+        <div class="card-body">
+            <form id="portForm" class="mb-3">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="host" placeholder="输入主机名或IP地址" required>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" name="port" placeholder="端口号" required>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary w-100" type="submit">扫描</button>
+                    </div>
+                </div>
+            </form>
+            <div id="portResult" class="alert alert-info" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- DNS查询 -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-globe me-2"></i>DNS查询</h5>
+        </div>
+        <div class="card-body">
+            <form id="dnsForm" class="mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="host" placeholder="输入域名" required>
+                    <button class="btn btn-primary" type="submit">查询</button>
+                </div>
+            </form>
+            <div id="dnsResult" class="alert alert-info" style="display: none;"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('pingForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const result = document.getElementById('pingResult');
+    
+    try {
+        const response = await fetch('/network/ping', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        
+        result.style.display = 'block';
+        if (data.success) {
+            result.textContent = data.result;
+        } else {
+            result.textContent = '错误: ' + data.error;
+        }
+    } catch (error) {
+        result.style.display = 'block';
+        result.textContent = '请求失败: ' + error;
+    }
+});
+
+document.getElementById('portForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const result = document.getElementById('portResult');
+    
+    try {
+        const response = await fetch('/network/port', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        
+        result.style.display = 'block';
+        if (data.success) {
+            result.textContent = data.result;
+            result.className = 'alert alert-info';
+        } else {
+            result.textContent = '错误: ' + data.error;
+            result.className = 'alert alert-danger';
+        }
+    } catch (error) {
+        result.style.display = 'block';
+        result.textContent = '请求失败: ' + error;
+        result.className = 'alert alert-danger';
+    }
+});
+
+document.getElementById('dnsForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const result = document.getElementById('dnsResult');
+    
+    try {
+        const response = await fetch('/network/dns', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        
+        result.style.display = 'block';
+        if (data.success) {
+            result.textContent = data.result;
+            result.className = 'alert alert-info';
+        } else {
+            result.textContent = '错误: ' + data.error;
+            result.className = 'alert alert-danger';
+        }
+    } catch (error) {
+        result.style.display = 'block';
+        result.textContent = '请求失败: ' + error;
+        result.className = 'alert alert-danger';
+    }
+});
+</script>
+{% endblock %} 

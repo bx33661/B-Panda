@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDFer</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* 动态背景样式 */
+        body {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+            background-size: 300% 300%;
+            animation: gradientAnimation 10s ease infinite;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .container {
+            max-width: 800px;
+            margin: 3rem auto;
+            background: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
+            color: #333;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .form-select, .form-control {
+            border-radius: 0.5rem;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 0.8rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <h1 class="text-center text-primary mb-4">PDF操作</h1>
+        <form action="/pdf/" method="post" enctype="multipart/form-data">
+            <!-- 操作类型 -->
+            <div class="mb-3">
+                <label for="action" class="form-label">操作类型:</label>
+                <select name="action" id="action" class="form-select">
+                    <option value="merge">合并</option>
+                    <option value="add_watermark">添加水印</option>
+                    <option value="extract_text">提取文本</option>
+                    <option value="split">拆分</option>
+                    <option value="encrypt">加密</option>
+                    <option value="rotate">旋转</option>
+                    <option value="crop">裁剪</option>
+                    <option value="compress">压缩</option>
+                    <option value="extract_pages">提取页面</option>
+                </select>
+            </div>
+
+            <!-- 输入文件 -->
+            <div class="mb-3">
+                <label for="input_file" class="form-label">输入文件:</label>
+                <input type="file" name="input_file" id="input_file" class="form-control">
+            </div>
+
+            <!-- 输出文件 -->
+            <div class="mb-3">
+                <label for="output_file" class="form-label">输出文件:</label>
+                <input type="text" name="output_file" id="output_file" class="form-control" placeholder="输出文件名">
+            </div>
+
+            <!-- 水印文本 -->
+            <div class="mb-3">
+                <label for="watermark_text" class="form-label">水印文本:</label>
+                <input type="text" name="watermark_text" id="watermark_text" class="form-control" placeholder="可选">
+            </div>
+
+            <!-- 密码 -->
+            <div class="mb-3">
+                <label for="password" class="form-label">密码:</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="可选">
+            </div>
+
+            <!-- 旋转角度 -->
+            <div class="mb-3">
+                <label for="degrees" class="form-label">旋转角度:</label>
+                <input type="number" name="degrees" id="degrees" class="form-control" placeholder="例如 90">
+            </div>
+
+            <!-- 裁剪边界 -->
+            <div class="mb-3">
+                <label for="box" class="form-label">裁剪边界:</label>
+                <input type="text" name="box" id="box" class="form-control" placeholder="格式: 左,上,右,下">
+            </div>
+
+            <!-- 页面范围 -->
+            <div class="mb-3">
+                <label for="page_range" class="form-label">页面范围:</label>
+                <input type="text" name="page_range" id="page_range" class="form-control" placeholder="例如 1-3">
+            </div>
+
+            <!-- 输入文件夹 -->
+            <div class="mb-3">
+                <label for="input_folder" class="form-label">输入文件夹:</label>
+                <input type="text" name="input_folder" id="input_folder" class="form-control" placeholder="可选">
+            </div>
+
+            <!-- 输出文件夹 -->
+            <div class="mb-3">
+                <label for="output_folder" class="form-label">输出文件夹:</label>
+                <input type="text" name="output_folder" id="output_folder" class="form-control" placeholder="可选">
+            </div>
+
+            <!-- 提交按钮 -->
+            <button type="submit" class="btn btn-primary">执行操作</button>
+        </form>
+        <div class="text-center mt-3">
+            <a href="{{ url_for('index') }}">返回首页</a>
+        </div>
+    </div>
+
+    <!-- 引入 Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
